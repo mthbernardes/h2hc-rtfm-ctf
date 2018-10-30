@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  raptor:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - code-network
+
+  h2database:
+    restart: always
+    build:
+      context: .
+      dockerfile: H2Dockerfile
+    volumes:
+      - ./h2:/home/h2/h2
+      - /tmp/h2:/opt/h2-data
+    networks:
+      - code-network
+
+networks:
+  code-network:
+    driver: bridge
+

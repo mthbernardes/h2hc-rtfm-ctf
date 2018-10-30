@@ -1,0 +1,13 @@
+FROM openjdk:10
+
+RUN useradd -ms /bin/bash h2 
+COPY ./login /home/h2
+COPY ./flag.txt /root
+RUN chown root:root /home/h2/login
+RUN chmod u+s /home/h2/login
+USER h2
+
+ENV DOWNLOAD http://www.h2database.com/h2-2018-03-18.zip
+ENV DATA_DIR /home/h2
+COPY h2.server.properties ${DATA_DIR}/.h2.server.properties
+CMD java -cp ${DATA_DIR}/h2/bin/h2*.jar org.h2.tools.Server -web -webAllowOthers -webPort 4444 -baseDir ${DATA_DIR}

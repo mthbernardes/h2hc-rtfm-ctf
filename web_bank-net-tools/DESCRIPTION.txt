@@ -1,0 +1,5 @@
+Ermed's Networking team is developing a new tool to do network tests.
+Try to hack this piece of shit of a code and get a motherfucker shell.
+
+Port:1337
+

@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  web:
+    restart: always
+    image: nginx:latest
+    ports:
+      - "1337:443"
+    volumes:
+      - ./src:/www
+      - ./etc/nginx.conf:/etc/nginx/nginx.conf
+      - ./etc/ssl:/etc/nginx/ssl
+    networks:
+      - code-network
+  php:
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/www
+    networks:
+      - code-network
+
+networks:
+  code-network:
+    driver: bridge
+
